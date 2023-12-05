@@ -31,15 +31,14 @@ class GCN(nn.Module):  # GCN模型，向空域的第一个图卷积
         output_1 = self.act(torch.matmul(graph_data, output_1))  # [B, N, N] ,[B, N, hid_c]，就是 \hat AWX
 
         # 第二个图卷积层
-        output_2 = self.linear_2(output_1)# WX
+        output_2 = self.linear_2(output_1)  # WX
         output_2 = self.act(torch.matmul(graph_data, output_2))  # [B, N, 1, Out_C] , 就是 \hat AWX
 
         return output_2.unsqueeze(2)  # 第２维的维度扩张
 
-
     @staticmethod
     def process_graph(graph_data):  # 这个就是在原始的邻接矩阵之上，再次变换，也就是\hat A = D_{-1/2}*A*D_{-1/2}
-        N = graph_data.size(0) # 获得节点的个数
+        N = graph_data.size(0)  # 获得节点的个数
         matrix_i = torch.eye(N, dtype=torch.float, device=graph_data.device)  # 定义[N, N]的单位矩阵
         graph_data += matrix_i  # [N, N]  ,就是 A+I
 

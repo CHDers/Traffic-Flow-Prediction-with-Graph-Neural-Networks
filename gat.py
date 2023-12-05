@@ -48,7 +48,7 @@ class GraphAttentionLayer(nn.Module):
         return torch.bmm(attention, h) + self.b  # [B, N, N] * [B, N, D]，，这个是第三步的，利用注意力系数对邻域节点进行有区别的信息聚合
 
 
-class GATSubNet(nn.Module): # 这个是多头注意力机制
+class GATSubNet(nn.Module):  # 这个是多头注意力机制
     def __init__(self, in_c, hid_c, out_c, n_heads):
         super(GATSubNet, self).__init__()
 
@@ -60,7 +60,6 @@ class GATSubNet(nn.Module): # 这个是多头注意力机制
         self.out_att = GraphAttentionLayer(hid_c * n_heads, out_c)
 
         self.act = nn.LeakyReLU()
-
 
     def forward(self, inputs, graph):
         """
@@ -114,4 +113,3 @@ if __name__ == '__main__':  # 测试模型是否合适
 
     y = net(data, device)
     print(y.size())
-

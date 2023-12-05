@@ -22,7 +22,7 @@ class Evaluation(object):
 
     @staticmethod
     def mape_(target, output):
-        return np.mean(np.abs(target - output) / (target + 5)) # 加５是因为target有可能为0，当然只要不太大，加几都行
+        return np.mean(np.abs(target - output) / (target + 5))  # 加５是因为target有可能为0，当然只要不太大，加几都行
 
     @staticmethod
     def rmse_(target, output):
@@ -38,7 +38,7 @@ class Evaluation(object):
 
 
 def visualize_result(h5_file, nodes_id, time_se, visualize_file):
-    file_obj = h5py.File(h5_file, "r") # 获得文件对象，这个文件对象有两个keys："predict"和"target"
+    file_obj = h5py.File(h5_file, "r")  # 获得文件对象，这个文件对象有两个keys："predict"和"target"
     prediction = file_obj["predict"][:][:, :, 0]  # [N, T],切片，最后一维取第0列，所以变成二维了，要是[:, :, :1]那么维度不会缩减
     target = file_obj["target"][:][:, :, 0]  # [N, T],同上
     file_obj.close()
@@ -58,4 +58,3 @@ def visualize_result(h5_file, nodes_id, time_se, visualize_file):
               np.max(np.array([np.max(plot_prediction), np.max(plot_target)]))])
 
     plt.savefig(visualize_file + ".png")
-

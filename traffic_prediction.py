@@ -136,12 +136,10 @@ def main():
             MAPE.append(performance[1])
             RMSE.append(performance[2])
 
-            print("Test Loss: {:02.4f}".format(
-                1000 * total_loss / len(test_data)))
+            print("Test Loss: {:02.4f}".format(1000 * total_loss / len(test_data)))
 
     # 三种指标取平均
-    print("Performance:  MAE {:2.2f}    {:2.2f}%    {:2.2f}".format(
-        np.mean(MAE), np.mean(MAPE * 100), np.mean(RMSE)))
+    print("Performance:  MAE {:2.2f}    {:2.2f}%    {:2.2f}".format(np.mean(MAE), np.mean(MAPE * 100), np.mean(RMSE)))
 
     # 将第0行的0删除，因为开始定义的时候用0填充，但是时间是从1开始的
     Predict = np.delete(Predict, 0, axis=1)
